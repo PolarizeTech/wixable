@@ -1,6 +1,6 @@
 {
   "name": "polarizetech/wixable",
-  "description": "A 'Wixable' model trait for accessing data collections from the Wix Headless CMS",
+  "description": "Automatically imports data collection items from the Wix Headless CMS to your Laravel models",
   "version": "0.0.1",
   "license": "MIT",
   "authors": [
