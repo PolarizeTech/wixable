@@ -1,0 +1,34 @@
+{
+  "name": "polarize/wixable",
+  "description": "A 'Wixable' model trait for accessing data collections from the Wix Headless CMS",
+  "license": "MIT",
+  "authors": [
+      {
+          "name": "Joshua Anderton",
+          "email": "hey@joshuaanderton.ca"
+      }
+  ],
+  "require": {
+      "php": "^8.2"
+  },
+  "autoload": {
+      "psr-4": {
+          "Wixable\\": "src"
+      }
+  },
+  "autoload-dev": {
+      "psr-4": {
+          "Wixable\\Tests\\": "tests"
+      }
+  },
+  "config": {
+      "sort-packages": true
+  },
+  "extra": {
+      "laravel": {
+          "providers": [
+              "Wixable\\WixableServiceProvider"
+          ]
+      }
+  }
+}
