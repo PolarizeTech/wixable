@@ -15,12 +15,36 @@ class BulkImportWixDataItems implements ShouldQueue
 
     protected string $model;
 
-    public function __construct(string $model)
+    protected ?string $cursor;
+
+    public function __construct(string $model, ?string $cursor = null)
     {
         $this->model = $model;
+        $this->cursor = $cursor;
     }
 
     public function handle()
+    {
+        $model = $this->model;
+        $dataCollectionId = (new $model)->getWixDataCollection();
+
+        $results = app('wixable')->queryDataItems(
+            dataCollectionId: $dataCollectionId,
+            query: ! $this->cursor ? [] : [
+                'cursorPaging' => ['cursor' => $this->cursor]
+            ]
+        );
+
+        collect($results['dataItems'])->each(fn ($dataItem) =>
+            SyncWixDataItem::dispatch($this->model, $dataItem)
+        );
+
+        if ($results['pagingMetadata']['hasNext'] === true) {
+            self::dispatch($this->model, $results['pagingMetadata']['cursors']['next']);
+        }
+    }
+
+    private function shouldSync(): bool
     {
         $model = $this->model;
         $dataCollectionId = (new $model)->getWixDataCollection();
@@ -31,19 +55,6 @@ class BulkImportWixDataItems implements ShouldQueue
             $status['total'] !== $model::count()
         );
 
-        if (! $outOfSync) {
-            return;
-        }
-
-        // do {
-            $results = app('wixable')->queryDataItems(
-                dataCollectionId: $dataCollectionId
-            );
-
-            collect($results['dataItems'])->each(fn ($dataItem) =>
-                SyncWixDataItem::dispatch($this->model, $dataItem)
-            );
-        // } while ($results['pagingMetadata']['hasNext'] === true);
-
+        return ! $this->cursor && ! $outOfSync;
     }
 }
