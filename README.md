@@ -47,6 +47,8 @@ class BreakfastSandwichReview extends Wixable
 ```
 class Reviews extends Wixable
 {
-    protected string $dataCollectionId = 'BreakfastSandwichReviews';
+    protected string $wixDataCollection = 'BreakfastSandwichReviews';
+
+    ...
 
 ```
