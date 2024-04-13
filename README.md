@@ -8,11 +8,9 @@ Install package:
 
 Add your Wix API credentials to your environment file:
 ```
-    // .env
-
-    WIX_API_KEY="..."
-    WIX_ACCOUNT_ID="..."
-    WIX_SITE_ID="..."
+WIX_API_KEY="..."
+WIX_ACCOUNT_ID="..."
+WIX_SITE_ID="..."
 ```
 
 Publish the migration for Wixables "wixable_data_items" table:
