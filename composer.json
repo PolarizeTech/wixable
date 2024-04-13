@@ -1,5 +1,5 @@
 {
-  "name": "polarize/wixable",
+  "name": "polarizetech/wixable",
   "description": "A 'Wixable' model trait for accessing data collections from the Wix Headless CMS",
   "license": "MIT",
   "authors": [
