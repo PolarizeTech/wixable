@@ -1,6 +1,7 @@
 {
   "name": "polarizetech/wixable",
   "description": "A 'Wixable' model trait for accessing data collections from the Wix Headless CMS",
+  "version": "0.0.1",
   "license": "MIT",
   "authors": [
       {
