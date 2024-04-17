@@ -19,8 +19,6 @@ Publish the migration for Wixables "wixable_data_items" table:
 Run migrations:
 `php artisan migrate`
 
-
-
 #### Setup your models
 Add a new class to your app/Models folder that extends `Wixable\Wixable`. Repeat for each of the **Data Collections** in Wix that you would like to keep synced (the model name should be the singular version of the data collection's ID).
 
@@ -51,4 +49,16 @@ class Reviews extends Wixable
 
     ...
 
+```
+
+### Schedule the importer
+To automatically import your wix data items, add the following line to your `AppServiceProvider` (or schedule the `php artisan wixable:import` command another way if you prefer).
+```
+use Illuminate\Support\Facades\Schedule;
+
+public function boot()
+{
+    Schedule::command('wixable:import')->everyFiveMinutes();
+
+    ...
 ```

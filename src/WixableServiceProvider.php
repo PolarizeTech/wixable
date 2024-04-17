@@ -17,8 +17,6 @@ class WixableServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        Schedule::command('wixable:import')->everyFiveMinutes();
-
         $this->publishesMigrations([
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'wixable.migrations');
